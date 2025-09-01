@@ -1,30 +1,53 @@
-# Hackathon voting system
+# Hackathon Voting System
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+해커톤 참가자들이 팀을 선택하고 투표할 수 있는 시스템입니다. 관리자는 결과를 실시간으로 확인하고 데이터를 관리할 수 있습니다.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/hmlee781-9829s-projects/v0-hackathon-voting-system)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/5lloyNmeDD3)
+## 🚀 배포
 
-## Overview
+### Railway 배포
+1. [Railway](https://railway.app)에 접속
+2. GitHub로 로그인
+3. "New Project" → "Deploy from GitHub repo"
+4. `hyemnyarwi-dev/hackathon-voting-system` 선택
+5. 자동 배포 완료
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+### 로컬 개발
+```bash
+npm install
+npm run dev
+```
 
-## Deployment
+## 🎯 주요 기능
 
-Your project is live at:
+- **참가자 투표**: 아이디어와 완성도 부문 투표
+- **심사위원 투표**: 각 부문당 최대 2표까지 투표
+- **실시간 결과**: 투표 결과와 순위 확인
+- **관리자 대시보드**: 팀 데이터 관리 및 투표자/심사위원 관리
 
-**[https://vercel.com/hmlee781-9829s-projects/v0-hackathon-voting-system](https://vercel.com/hmlee781-9829s-projects/v0-hackathon-voting-system)**
+## 🛠 기술 스택
 
-## Build your app
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **UI**: Tailwind CSS, Radix UI
+- **Database**: JSON 파일 기반 (로컬)
+- **Deployment**: Railway
 
-Continue building your app on:
+## 📁 프로젝트 구조
 
-**[https://v0.app/chat/projects/5lloyNmeDD3](https://v0.app/chat/projects/5lloyNmeDD3)**
+```
+hackathon-voting/
+├── app/                    # Next.js App Router
+│   ├── api/               # API 라우트
+│   ├── admin/              # 관리자 페이지
+│   ├── vote/               # 투표 페이지
+│   ├── judge/              # 심사위원 페이지
+│   └── results/            # 결과 페이지
+├── components/             # UI 컴포넌트
+├── data/                   # JSON 데이터 파일
+├── lib/                    # 유틸리티 함수
+└── public/                 # 정적 파일
+```
 
-## How It Works
+## 🔧 환경 설정
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- Node.js 18+ 필요
+- npm 또는 pnpm 패키지 매니저
