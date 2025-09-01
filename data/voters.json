@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "ldap_nickname": "kaia.toast",
+    "team_id": 30,
+    "voter_group": "C",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-08-31T15:42:06.622Z"
+  },
+  {
+    "id": 2,
+    "ldap_nickname": "kai.09",
+    "team_id": 30,
+    "voter_group": "C",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-08-31T15:56:14.146Z"
+  },
+  {
+    "id": 3,
+    "ldap_nickname": 3,
+    "team_id": "juno.choi",
+    "voter_group": 30,
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-01T13:06:11.244Z"
+  }
+]
