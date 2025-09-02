@@ -215,17 +215,36 @@ export async function execute(queryText: string, params?: any[]): Promise<void> 
       writeData(TEAMS_FILE, filteredTeams)
     } else if (queryText.includes("INSERT INTO voters")) {
       const voters = readData<Voter>(VOTERS_FILE)
-      const newVoter: Voter = {
-        id: voters.length > 0 ? Math.max(...voters.map(v => v.id)) + 1 : 1,
-        ldap_nickname: params![0],
-        team_id: params![1],
-        voter_group: params![2] as "A" | "B" | "C",
-        has_voted_idea: false,
-        has_voted_implementation: false,
-        created_at: new Date().toISOString()
+      
+      // Check if voter already exists with the same LDAP nickname
+      const existingVoter = voters.find(v => v.ldap_nickname === params![0])
+      if (existingVoter) {
+        // Update existing voter instead of creating new one
+        const updatedVoters = voters.map(voter => {
+          if (voter.ldap_nickname === params![0]) {
+            return {
+              ...voter,
+              team_id: params![1],
+              voter_group: params![2] as "A" | "B" | "C"
+            }
+          }
+          return voter
+        })
+        writeData(VOTERS_FILE, updatedVoters)
+      } else {
+        // Create new voter
+        const newVoter: Voter = {
+          id: voters.length > 0 ? Math.max(...voters.map(v => v.id)) + 1 : 1,
+          ldap_nickname: params![0],
+          team_id: params![1],
+          voter_group: params![2] as "A" | "B" | "C",
+          has_voted_idea: false,
+          has_voted_implementation: false,
+          created_at: new Date().toISOString()
+        }
+        voters.push(newVoter)
+        writeData(VOTERS_FILE, voters)
       }
-      voters.push(newVoter)
-      writeData(VOTERS_FILE, voters)
     } else if (queryText.includes("INSERT INTO judges")) {
       const judges = readData<Judge>(JUDGES_FILE)
       const newJudge: Judge = {
