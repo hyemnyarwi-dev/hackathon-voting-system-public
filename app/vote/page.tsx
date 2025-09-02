@@ -26,6 +26,7 @@ export default function VotePage() {
   const [teams, setTeams] = useState<Team[]>([])
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
   const [showResults, setShowResults] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
   const router = useRouter()
   const { toast } = useToast()
 
@@ -121,6 +122,9 @@ export default function VotePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    // Clear previous error message
+    setErrorMessage("")
+
     if (!ldapNickname.trim()) {
       toast({
         title: "입력 오류",
@@ -156,7 +160,10 @@ export default function VotePage() {
       const result = await response.json()
 
       if (!response.ok) {
-        throw new Error(result.error || "인증 실패")
+        // Set error message for display
+        const errorMsg = result.error || "인증 실패"
+        setErrorMessage(errorMsg)
+        throw new Error(errorMsg)
       }
 
       // Store voter session
@@ -277,6 +284,16 @@ export default function VotePage() {
               <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
                 {isLoading ? "인증 중..." : "투표 시작하기"}
               </Button>
+
+              {/* Error Message */}
+              {errorMessage && (
+                <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-600 text-lg">⚠️</span>
+                    <p className="text-red-700 text-sm font-medium">{errorMessage}</p>
+                  </div>
+                </div>
+              )}
             </form>
           </CardContent>
         </Card>
