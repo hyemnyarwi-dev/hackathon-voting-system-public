@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
 
         if (!isValidAuth) {
           return NextResponse.json({ 
-            error: "⚠️ 잘못된 인증번호를 입력하셨습니다" 
+            error: "⚠️ 인증 번호가 올바르지 않습니다. 정확한 인증 번호를 입력해주세요." 
           }, { status: 400 })
         }
 
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
 
       if (!isValidAuth) {
         return NextResponse.json({ 
-          error: "⚠️ 잘못된 인증번호를 입력하셨습니다" 
+          error: "⚠️ 인증 번호가 올바르지 않습니다. 정확한 인증 번호를 입력해주세요." 
         }, { status: 400 })
       }
     }
