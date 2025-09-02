@@ -8,4 +8,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: NPM_CONFIG_PRODUCTION
-        value: false 
+        value: false
+      - key: PORT
+        value: 10000 
