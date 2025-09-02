@@ -372,6 +372,11 @@ export default function AdminPage() {
     }
   }
 
+  const getTeamNameById = (teamId: number) => {
+    const team = teams.find(t => t.id === teamId)
+    return team ? team.team_name : `팀 ${teamId}`
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -391,16 +396,10 @@ export default function AdminPage() {
             <h1 className="text-3xl font-bold text-foreground mb-2">관리자 대시보드</h1>
             <p className="text-muted-foreground">팀 관리 및 투표자 관리</p>
           </div>
-          <div className="flex gap-2">
-            <Button onClick={fetchExistingTeams} variant="outline" disabled={isLoading}>
-              <RefreshCw className="h-4 w-4 mr-2" />
-              새로고침
-            </Button>
           <Button onClick={() => (window.location.href = "/")} variant="outline">
             <Home className="h-4 w-4 mr-2" />
             홈으로 돌아가기
           </Button>
-        </div>
         </div>
 
         <Tabs defaultValue="teams" className="space-y-6">
@@ -710,7 +709,7 @@ export default function AdminPage() {
                         <TableRow key={voter.id}>
                           <TableCell className="font-medium">{voter.id}</TableCell>
                           <TableCell>{voter.ldap_nickname}</TableCell>
-                          <TableCell>{voter.team_id}</TableCell>
+                          <TableCell>{getTeamNameById(voter.team_id)}</TableCell>
                           <TableCell>
                             <Badge className="bg-primary text-primary-foreground">
                               {voter.voter_group}
