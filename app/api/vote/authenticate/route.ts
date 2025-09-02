@@ -84,9 +84,8 @@ export async function POST(request: NextRequest) {
 
     // Save to database
     await execute(
-      "INSERT INTO voters (id, ldap_nickname, team_id, voter_group, has_voted_idea, has_voted_implementation, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO voters (ldap_nickname, team_id, voter_group, has_voted_idea, has_voted_implementation, created_at) VALUES (?, ?, ?, ?, ?, ?)",
       [
-        newVoter.id,
         newVoter.ldap_nickname,
         newVoter.team_id,
         newVoter.voter_group,
