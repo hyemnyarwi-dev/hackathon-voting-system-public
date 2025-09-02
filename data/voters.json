@@ -25,5 +25,23 @@
     "has_voted_idea": false,
     "has_voted_implementation": false,
     "created_at": "2025-09-01T13:06:11.244Z"
+  },
+  {
+    "id": 4,
+    "ldap_nickname": 4,
+    "team_id": "aaron.bless",
+    "voter_group": 12,
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T01:59:22.494Z"
+  },
+  {
+    "id": 5,
+    "ldap_nickname": 5,
+    "team_id": "kay.one",
+    "voter_group": 25,
+    "has_voted_idea": true,
+    "has_voted_implementation": true,
+    "created_at": "2025-09-02T02:11:41.866Z"
   }
 ]

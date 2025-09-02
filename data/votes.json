@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "voter_id": 5,
+    "team_id": 27,
+    "vote_type": "idea",
+    "voter_ldap": 5,
+    "created_at": "2025-09-02T02:11:46.012Z"
+  },
+  {
+    "id": 2,
+    "voter_id": 5,
+    "team_id": 26,
+    "vote_type": "implementation",
+    "voter_ldap": 5,
+    "created_at": "2025-09-02T02:11:48.279Z"
+  }
+]
