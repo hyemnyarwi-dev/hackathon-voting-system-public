@@ -21,6 +21,7 @@ interface SearchResult {
 
 export default function VotePage() {
   const [ldapNickname, setLdapNickname] = useState("")
+  const [authCode, setAuthCode] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [teams, setTeams] = useState<Team[]>([])
   const [searchResults, setSearchResults] = useState<SearchResult[]>([])
@@ -129,6 +130,15 @@ export default function VotePage() {
       return
     }
 
+    if (!authCode.trim()) {
+      toast({
+        title: "입력 오류",
+        description: "인증 번호를 입력해주세요.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setIsLoading(true)
 
     try {
@@ -139,6 +149,7 @@ export default function VotePage() {
         },
         body: JSON.stringify({
           ldapNickname: ldapNickname.trim(),
+          authCode: authCode.trim(),
         }),
       })
 
@@ -241,6 +252,25 @@ export default function VotePage() {
 
                 <p className="text-xs text-muted-foreground">
                   시스템이 자동으로 팀과 그룹을 찾아서 투표를 진행합니다.
+                </p>
+              </div>
+
+              {/* Authentication Code */}
+              <div className="space-y-2">
+                <Label htmlFor="auth-code">인증 번호</Label>
+                <Input
+                  id="auth-code"
+                  type="text"
+                  placeholder="6자리 인증 번호를 입력하세요"
+                  value={authCode}
+                  onChange={(e) => setAuthCode(e.target.value)}
+                  maxLength={6}
+                  pattern="[0-9]{6}"
+                  className="font-mono text-center text-lg tracking-wider"
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  팀 등록 시 발급받은 개인 인증 번호를 입력하세요.
                 </p>
               </div>
 

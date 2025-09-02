@@ -1,6 +1,11 @@
 import fs from "fs"
 import path from "path"
 
+export interface TeamMember {
+  ldap_nickname: string
+  auth_code: string
+}
+
 export interface Team {
   id: number
   team_number: number
@@ -12,6 +17,11 @@ export interface Team {
   total_members: number
   team_group: "A" | "B" | "C"
   created_at: string
+  // 인증 번호 정보
+  leader_auth_code: string
+  member2_auth_code?: string
+  member3_auth_code?: string
+  member4_auth_code?: string
 }
 
 export interface Voter {
@@ -113,6 +123,11 @@ export function writeData<T>(filePath: string, data: T[]): void {
   }
 }
 
+// Generate unique 6-digit authentication code
+function generateAuthCode(): string {
+  return Math.floor(100000 + Math.random() * 900000).toString()
+}
+
 // Initialize database on first import
 initializeDatabase()
 
@@ -205,7 +220,12 @@ export async function execute(queryText: string, params?: any[]): Promise<void> 
         member4_name: params![4] || undefined,
         total_members: params![6],
         team_group: params![7] as "A" | "B" | "C",
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
+        // 인증 번호 생성
+        leader_auth_code: generateAuthCode(),
+        member2_auth_code: params![2] ? generateAuthCode() : undefined,
+        member3_auth_code: params![3] ? generateAuthCode() : undefined,
+        member4_auth_code: params![4] ? generateAuthCode() : undefined
       }
       teams.push(newTeam)
       writeData(TEAMS_FILE, teams)

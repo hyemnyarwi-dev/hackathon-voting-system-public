@@ -3,11 +3,15 @@ import { query, execute } from "@/lib/database"
 
 export async function POST(request: NextRequest) {
   try {
-    const { teamId, ldapNickname, voterGroup } = await request.json()
+    const { teamId, ldapNickname, voterGroup, authCode } = await request.json()
 
     // Validate input
     if (!ldapNickname) {
       return NextResponse.json({ error: "LDAP 닉네임을 입력해주세요." }, { status: 400 })
+    }
+    
+    if (!authCode) {
+      return NextResponse.json({ error: "인증 번호를 입력해주세요." }, { status: 400 })
     }
 
     // Check if voter already exists
@@ -41,11 +45,53 @@ export async function POST(request: NextRequest) {
       })
 
       if (foundTeam) {
+        // 인증 번호 확인
+        let isValidAuth = false
+        if (foundTeam.leader_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+          isValidAuth = foundTeam.leader_auth_code === authCode
+        } else if (foundTeam.member2_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+          isValidAuth = foundTeam.member2_auth_code === authCode
+        } else if (foundTeam.member3_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+          isValidAuth = foundTeam.member3_auth_code === authCode
+        } else if (foundTeam.member4_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+          isValidAuth = foundTeam.member4_auth_code === authCode
+        }
+
+        if (!isValidAuth) {
+          return NextResponse.json({ 
+            error: "인증 번호가 올바르지 않습니다. 정확한 인증 번호를 입력해주세요." 
+          }, { status: 400 })
+        }
+
         targetTeamId = foundTeam.id
         targetVoterGroup = foundTeam.team_group
       } else {
         return NextResponse.json({ 
           error: "해당 LDAP 닉네임으로 팀을 찾을 수 없습니다. 정확한 LDAP 닉네임을 입력해주세요." 
+        }, { status: 400 })
+      }
+    } else {
+      // teamId가 제공된 경우에도 인증 번호 확인
+      const teams = await query("SELECT * FROM teams WHERE id = ?", [targetTeamId])
+      if (teams.length === 0) {
+        return NextResponse.json({ error: "존재하지 않는 팀입니다." }, { status: 400 })
+      }
+      
+      const team = teams[0]
+      let isValidAuth = false
+      if (team.leader_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+        isValidAuth = team.leader_auth_code === authCode
+      } else if (team.member2_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+        isValidAuth = team.member2_auth_code === authCode
+      } else if (team.member3_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+        isValidAuth = team.member3_auth_code === authCode
+      } else if (team.member4_name?.toLowerCase() === ldapNickname.toLowerCase()) {
+        isValidAuth = team.member4_auth_code === authCode
+      }
+
+      if (!isValidAuth) {
+        return NextResponse.json({ 
+          error: "인증 번호가 올바르지 않습니다. 정확한 인증 번호를 입력해주세요." 
         }, { status: 400 })
       }
     }

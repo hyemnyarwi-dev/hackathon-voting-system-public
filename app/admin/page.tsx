@@ -474,6 +474,7 @@ export default function AdminPage() {
                       <TableHead>팀장</TableHead>
                       <TableHead>팀원</TableHead>
                       <TableHead>그룹</TableHead>
+                      <TableHead>인증 번호</TableHead>
                       <TableHead>작업</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -492,6 +493,14 @@ export default function AdminPage() {
                             <Badge className="bg-primary text-primary-foreground">
                               {team.team_group}
                             </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="text-xs space-y-1">
+                              <div><strong>팀장:</strong> {team.leader_auth_code}</div>
+                              {team.member2_auth_code && <div><strong>팀원2:</strong> {team.member2_auth_code}</div>}
+                              {team.member3_auth_code && <div><strong>팀원3:</strong> {team.member3_auth_code}</div>}
+                              {team.member4_auth_code && <div><strong>팀원4:</strong> {team.member4_auth_code}</div>}
+                            </div>
                           </TableCell>
                           <TableCell>
                             <AlertDialog>
