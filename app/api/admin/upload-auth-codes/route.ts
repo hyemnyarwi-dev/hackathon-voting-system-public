@@ -40,48 +40,77 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "유효한 인증 번호 데이터가 없습니다." }, { status: 400 })
     }
 
+    console.log("[v0] Auth codes upload: Processing", authCodes.length, "auth codes")
+
     // Get existing teams
     const existingTeams = await query("SELECT * FROM teams")
     
-    // Update teams with auth codes
+    // Group auth codes by team
+    const teamAuthCodes = new Map()
+    
     for (const authCodeData of authCodes) {
+      const teamKey = `${authCodeData.team_number}-${authCodeData.team_name}`
+      
+      if (!teamAuthCodes.has(teamKey)) {
+        teamAuthCodes.set(teamKey, {
+          team_number: authCodeData.team_number,
+          team_name: authCodeData.team_name,
+          leader_auth_code: "",
+          member2_auth_code: "",
+          member3_auth_code: "",
+          member4_auth_code: ""
+        })
+      }
+      
+      const teamData = teamAuthCodes.get(teamKey)
+      
+      if (authCodeData.member_type === "팀장") {
+        teamData.leader_auth_code = authCodeData.auth_code
+      } else if (authCodeData.member_type === "팀원2") {
+        teamData.member2_auth_code = authCodeData.auth_code
+      } else if (authCodeData.member_type === "팀원3") {
+        teamData.member3_auth_code = authCodeData.auth_code
+      } else if (authCodeData.member_type === "팀원4") {
+        teamData.member4_auth_code = authCodeData.auth_code
+      }
+    }
+    
+    // Update teams with auth codes
+    let updatedCount = 0
+    for (const [teamKey, authCodeData] of teamAuthCodes) {
       const team = existingTeams.find(t => 
         t.team_number === authCodeData.team_number && 
         t.team_name === authCodeData.team_name
       )
 
       if (team) {
-        // Update team with auth code
-        const updatedTeam = { ...team }
-        
-        if (authCodeData.member_type === "팀장") {
-          updatedTeam.leader_auth_code = authCodeData.auth_code
-        } else if (authCodeData.member_type === "팀원2") {
-          updatedTeam.member2_auth_code = authCodeData.auth_code
-        } else if (authCodeData.member_type === "팀원3") {
-          updatedTeam.member3_auth_code = authCodeData.auth_code
-        } else if (authCodeData.member_type === "팀원4") {
-          updatedTeam.member4_auth_code = authCodeData.auth_code
-        }
-
         // Update in database
+        console.log("[v0] Updating team:", team.team_name, "with auth codes:", {
+          leader: authCodeData.leader_auth_code,
+          member2: authCodeData.member2_auth_code,
+          member3: authCodeData.member3_auth_code,
+          member4: authCodeData.member4_auth_code
+        })
+        
         await execute(
           `UPDATE teams SET leader_auth_code = ?, member2_auth_code = ?, member3_auth_code = ?, member4_auth_code = ? WHERE id = ?`,
           [
-            updatedTeam.leader_auth_code,
-            updatedTeam.member2_auth_code,
-            updatedTeam.member3_auth_code,
-            updatedTeam.member4_auth_code,
+            authCodeData.leader_auth_code,
+            authCodeData.member2_auth_code,
+            authCodeData.member3_auth_code,
+            authCodeData.member4_auth_code,
             team.id
           ]
         )
+        updatedCount++
       }
     }
 
     return NextResponse.json({
       success: true,
-      message: `${authCodes.length}개의 인증 번호가 성공적으로 업데이트되었습니다.`,
-      updatedCount: authCodes.length
+      message: `${updatedCount}개 팀의 인증 번호가 성공적으로 업데이트되었습니다.`,
+      updatedCount: updatedCount,
+      totalAuthCodes: authCodes.length
     })
   } catch (error) {
     console.error("Auth codes upload error:", error)
