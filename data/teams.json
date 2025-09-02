@@ -9,7 +9,11 @@
     "member4_name": "sean.baek",
     "total_members": 4,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.819Z"
+    "created_at": "2025-09-02T06:21:31.661Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 2,
@@ -18,7 +22,8 @@
     "leader_name": "leo.bing",
     "total_members": 1,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.819Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": ""
   },
   {
     "id": 3,
@@ -30,7 +35,11 @@
     "member4_name": "james.yu",
     "total_members": 4,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.819Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 4,
@@ -42,7 +51,11 @@
     "member4_name": "ud.zip",
     "total_members": 4,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.819Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 5,
@@ -53,7 +66,10 @@
     "member3_name": "jackson.yoon",
     "total_members": 3,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 6,
@@ -63,7 +79,9 @@
     "member2_name": "vito.kim",
     "total_members": 2,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": ""
   },
   {
     "id": 7,
@@ -75,7 +93,11 @@
     "member4_name": "rian.bow",
     "total_members": 4,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 8,
@@ -84,7 +106,8 @@
     "leader_name": "bacchus.f",
     "total_members": 1,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": ""
   },
   {
     "id": 9,
@@ -96,7 +119,11 @@
     "member4_name": "khloe.wynn",
     "total_members": 4,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 10,
@@ -107,7 +134,10 @@
     "member3_name": "bell.na",
     "total_members": 3,
     "team_group": "A",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 11,
@@ -119,7 +149,11 @@
     "member4_name": "adam.min",
     "total_members": 5,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 12,
@@ -131,7 +165,11 @@
     "member4_name": "harry.2024",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 13,
@@ -143,7 +181,11 @@
     "member4_name": "danny.l",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.820Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 14,
@@ -155,7 +197,11 @@
     "member4_name": "theo.jo",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 15,
@@ -166,7 +212,10 @@
     "member3_name": "orsay.art",
     "total_members": 3,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 16,
@@ -178,7 +227,11 @@
     "member4_name": "zero.a",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 17,
@@ -190,7 +243,11 @@
     "member4_name": "brett.bang",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 18,
@@ -202,7 +259,11 @@
     "member4_name": "millie.y",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 19,
@@ -213,7 +274,10 @@
     "member3_name": "ellen.aries",
     "total_members": 3,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.821Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 20,
@@ -224,7 +288,10 @@
     "member3_name": "jayden.hue",
     "total_members": 3,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.822Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 21,
@@ -236,7 +303,11 @@
     "member4_name": "hayden.cloud",
     "total_members": 4,
     "team_group": "B",
-    "created_at": "2025-09-02T02:11:07.822Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 22,
@@ -248,7 +319,11 @@
     "member4_name": "silva.nus",
     "total_members": 4,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.822Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 23,
@@ -259,7 +334,10 @@
     "member3_name": "wendy.house",
     "total_members": 3,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.822Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 24,
@@ -271,7 +349,11 @@
     "member4_name": "martin.sw",
     "total_members": 4,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.822Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 25,
@@ -283,7 +365,11 @@
     "member4_name": "rhys.kim",
     "total_members": 4,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.823Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 26,
@@ -294,7 +380,10 @@
     "member3_name": "jerry.dy",
     "total_members": 3,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.823Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 27,
@@ -305,7 +394,10 @@
     "member3_name": "dwayne.jung",
     "total_members": 3,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.823Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": ""
   },
   {
     "id": 28,
@@ -315,7 +407,9 @@
     "member2_name": "david.25",
     "total_members": 2,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.823Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": ""
   },
   {
     "id": 29,
@@ -325,7 +419,9 @@
     "member2_name": "tony.arc",
     "total_members": 2,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.823Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": ""
   },
   {
     "id": 30,
@@ -337,7 +433,11 @@
     "member4_name": "kai.09",
     "total_members": 4,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.824Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": "",
+    "member3_auth_code": "",
+    "member4_auth_code": ""
   },
   {
     "id": 31,
@@ -347,6 +447,8 @@
     "member2_name": "jarry.han",
     "total_members": 2,
     "team_group": "C",
-    "created_at": "2025-09-02T02:11:07.825Z"
+    "created_at": "2025-09-02T06:21:31.662Z",
+    "leader_auth_code": "",
+    "member2_auth_code": ""
   }
 ]

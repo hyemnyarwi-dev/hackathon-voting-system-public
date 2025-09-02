@@ -221,11 +221,11 @@ export async function execute(queryText: string, params?: any[]): Promise<void> 
         total_members: params![6],
         team_group: params![7] as "A" | "B" | "C",
         created_at: new Date().toISOString(),
-        // 인증 번호 생성
-        leader_auth_code: generateAuthCode(),
-        member2_auth_code: params![2] ? generateAuthCode() : undefined,
-        member3_auth_code: params![3] ? generateAuthCode() : undefined,
-        member4_auth_code: params![4] ? generateAuthCode() : undefined
+        // 인증 번호는 별도 업로드로 관리
+        leader_auth_code: "",
+        member2_auth_code: params![2] ? "" : undefined,
+        member3_auth_code: params![3] ? "" : undefined,
+        member4_auth_code: params![4] ? "" : undefined
       }
       teams.push(newTeam)
       writeData(TEAMS_FILE, teams)

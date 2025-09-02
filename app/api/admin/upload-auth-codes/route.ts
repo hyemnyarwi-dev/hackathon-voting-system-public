@@ -24,12 +24,11 @@ export async function POST(request: NextRequest) {
     const authCodes = jsonData
       .slice(1)
       .map((row) => {
-        const [teamNumber, teamName, group, memberType, ldapNickname, authCode] = row
+        const [teamNumber, teamName, memberType, ldapNickname, authCode] = row
 
         return {
           team_number: Number.parseInt(teamNumber) || 0,
           team_name: teamName || "",
-          group: (group || "A").toString().toUpperCase(),
           member_type: memberType || "",
           ldap_nickname: ldapNickname || "",
           auth_code: authCode || "",

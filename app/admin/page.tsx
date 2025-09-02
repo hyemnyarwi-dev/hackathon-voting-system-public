@@ -31,6 +31,7 @@ export default function AdminPage() {
   const [isAddingJudge, setIsAddingJudge] = useState(false)
   const [isDeletingJudge, setIsDeletingJudge] = useState(false)
   const [isUploadingAuthCodes, setIsUploadingAuthCodes] = useState(false)
+  const [uploadedAuthCodesFile, setUploadedAuthCodesFile] = useState<File | null>(null)
   const { toast } = useToast()
 
   // Load existing teams from database on page load
@@ -352,14 +353,31 @@ export default function AdminPage() {
     }
   }
 
-  const handleAuthCodesUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAuthCodesFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
-    if (!file) return
+    if (file) {
+      setUploadedAuthCodesFile(file)
+      toast({
+        title: "파일 선택 완료",
+        description: `${file.name} 파일이 선택되었습니다. 업데이트 버튼을 클릭하여 적용하세요.`,
+      })
+    }
+  }
+
+  const handleAuthCodesUpload = async () => {
+    if (!uploadedAuthCodesFile) {
+      toast({
+        title: "파일 선택 필요",
+        description: "인증 번호 파일을 먼저 선택해주세요.",
+        variant: "destructive",
+      })
+      return
+    }
 
     setIsUploadingAuthCodes(true)
     try {
       const formData = new FormData()
-      formData.append("file", file)
+      formData.append("file", uploadedAuthCodesFile)
 
       const response = await fetch("/api/admin/upload-auth-codes", {
         method: "POST",
@@ -374,6 +392,7 @@ export default function AdminPage() {
           description: data.message,
         })
         fetchExistingTeams() // 팀 목록 새로고침
+        setUploadedAuthCodesFile(null) // 파일 상태 초기화
       } else {
         throw new Error(data.error || "업로드 실패")
       }
@@ -385,7 +404,6 @@ export default function AdminPage() {
       })
     } finally {
       setIsUploadingAuthCodes(false)
-      event.target.value = "" // 파일 입력 초기화
     }
   }
 
@@ -509,12 +527,21 @@ export default function AdminPage() {
                 id="auth-codes-upload"
                 type="file"
                 accept=".xlsx,.xls"
-                onChange={handleAuthCodesUpload}
+                onChange={handleAuthCodesFileSelect}
                 disabled={isUploadingAuthCodes}
               />
               <p className="text-xs text-muted-foreground">
-                지원 형식: .xlsx, .xls (팀 번호, 팀명, 그룹, 멤버 구분, LDAP 닉네임, 인증 번호 컬럼 포함)
+                지원 형식: .xlsx, .xls (팀 번호, 팀명, 멤버 구분, LDAP 닉네임, 인증 번호 컬럼 포함)
               </p>
+            </div>
+
+            <div className="flex gap-2">
+              <Button 
+                onClick={handleAuthCodesUpload} 
+                disabled={!uploadedAuthCodesFile || isUploadingAuthCodes}
+              >
+                {isUploadingAuthCodes ? "업로드 중..." : "업데이트(저장)"}
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -540,7 +567,6 @@ export default function AdminPage() {
                       <TableHead>팀장</TableHead>
                       <TableHead>팀원</TableHead>
                       <TableHead>그룹</TableHead>
-                      <TableHead>인증 번호</TableHead>
                       <TableHead>작업</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -559,14 +585,6 @@ export default function AdminPage() {
                             <Badge className="bg-primary text-primary-foreground">
                               {team.team_group}
                             </Badge>
-                          </TableCell>
-                          <TableCell>
-                            <div className="text-xs space-y-1">
-                              <div><strong>팀장:</strong> {team.leader_auth_code}</div>
-                              {team.member2_auth_code && <div><strong>팀원2:</strong> {team.member2_auth_code}</div>}
-                              {team.member3_auth_code && <div><strong>팀원3:</strong> {team.member3_auth_code}</div>}
-                              {team.member4_auth_code && <div><strong>팀원4:</strong> {team.member4_auth_code}</div>}
-                            </div>
                           </TableCell>
                           <TableCell>
                             <AlertDialog>

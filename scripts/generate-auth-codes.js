@@ -13,7 +13,6 @@ teamsData.forEach(team => {
   excelData.push({
     '팀 번호': team.team_number,
     '팀명': team.team_name,
-    '그룹': team.team_group,
     '멤버 구분': '팀장',
     'LDAP 닉네임': team.leader_name,
     '인증 번호': team.leader_auth_code
@@ -24,7 +23,6 @@ teamsData.forEach(team => {
     excelData.push({
       '팀 번호': team.team_number,
       '팀명': team.team_name,
-      '그룹': team.team_group,
       '멤버 구분': '팀원2',
       'LDAP 닉네임': team.member2_name,
       '인증 번호': team.member2_auth_code
@@ -36,7 +34,6 @@ teamsData.forEach(team => {
     excelData.push({
       '팀 번호': team.team_number,
       '팀명': team.team_name,
-      '그룹': team.team_group,
       '멤버 구분': '팀원3',
       'LDAP 닉네임': team.member3_name,
       '인증 번호': team.member3_auth_code
@@ -48,7 +45,6 @@ teamsData.forEach(team => {
     excelData.push({
       '팀 번호': team.team_number,
       '팀명': team.team_name,
-      '그룹': team.team_group,
       '멤버 구분': '팀원4',
       'LDAP 닉네임': team.member4_name,
       '인증 번호': team.member4_auth_code
@@ -64,7 +60,6 @@ const worksheet = XLSX.utils.json_to_sheet(excelData);
 worksheet['!cols'] = [
   { width: 8 },  // 팀 번호
   { width: 25 }, // 팀명
-  { width: 5 },  // 그룹
   { width: 10 }, // 멤버 구분
   { width: 20 }, // LDAP 닉네임
   { width: 12 }  // 인증 번호
