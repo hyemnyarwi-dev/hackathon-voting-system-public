@@ -337,6 +337,21 @@ export async function execute(queryText: string, params?: any[]): Promise<void> 
         return judge
       })
       writeData(JUDGES_FILE, updatedJudges)
+    } else if (queryText.includes("UPDATE teams SET leader_auth_code = ?")) {
+      const teams = readData<Team>(TEAMS_FILE)
+      const updatedTeams = teams.map(team => {
+        if (team.id === params![4]) {
+          return {
+            ...team,
+            leader_auth_code: params![0],
+            member2_auth_code: params![1],
+            member3_auth_code: params![2],
+            member4_auth_code: params![3]
+          }
+        }
+        return team
+      })
+      writeData(TEAMS_FILE, updatedTeams)
     }
 
     console.log("[v0] Database execute completed")

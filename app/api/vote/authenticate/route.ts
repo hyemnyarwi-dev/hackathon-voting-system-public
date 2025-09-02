@@ -46,16 +46,39 @@ export async function POST(request: NextRequest) {
 
       if (foundTeam) {
         // 인증 번호 확인
+        console.log("[v0] Auth Debug:", {
+          ldapNickname,
+          authCode,
+          foundTeam: {
+            leader_name: foundTeam.leader_name,
+            leader_auth_code: foundTeam.leader_auth_code,
+            member2_name: foundTeam.member2_name,
+            member2_auth_code: foundTeam.member2_auth_code,
+            member3_name: foundTeam.member3_name,
+            member3_auth_code: foundTeam.member3_auth_code,
+            member4_name: foundTeam.member4_name,
+            member4_auth_code: foundTeam.member4_auth_code
+          }
+        })
+
         let isValidAuth = false
+        let matchedMember = ""
+        
         if (foundTeam.leader_name?.toLowerCase() === ldapNickname.toLowerCase()) {
           isValidAuth = foundTeam.leader_auth_code === authCode
+          matchedMember = "팀장"
         } else if (foundTeam.member2_name?.toLowerCase() === ldapNickname.toLowerCase()) {
           isValidAuth = foundTeam.member2_auth_code === authCode
+          matchedMember = "팀원2"
         } else if (foundTeam.member3_name?.toLowerCase() === ldapNickname.toLowerCase()) {
           isValidAuth = foundTeam.member3_auth_code === authCode
+          matchedMember = "팀원3"
         } else if (foundTeam.member4_name?.toLowerCase() === ldapNickname.toLowerCase()) {
           isValidAuth = foundTeam.member4_auth_code === authCode
+          matchedMember = "팀원4"
         }
+
+        console.log("[v0] Auth Result:", { isValidAuth, matchedMember })
 
         if (!isValidAuth) {
           return NextResponse.json({ 

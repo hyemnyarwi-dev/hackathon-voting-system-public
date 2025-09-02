@@ -30,6 +30,7 @@ export default function AdminPage() {
   const [newJudgeGroup, setNewJudgeGroup] = useState("")
   const [isAddingJudge, setIsAddingJudge] = useState(false)
   const [isDeletingJudge, setIsDeletingJudge] = useState(false)
+  const [isUploadingAuthCodes, setIsUploadingAuthCodes] = useState(false)
   const { toast } = useToast()
 
   // Load existing teams from database on page load
@@ -351,6 +352,43 @@ export default function AdminPage() {
     }
   }
 
+  const handleAuthCodesUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    setIsUploadingAuthCodes(true)
+    try {
+      const formData = new FormData()
+      formData.append("file", file)
+
+      const response = await fetch("/api/admin/upload-auth-codes", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        toast({
+          title: "인증 번호 업로드 완료",
+          description: data.message,
+        })
+        fetchExistingTeams() // 팀 목록 새로고침
+      } else {
+        throw new Error(data.error || "업로드 실패")
+      }
+    } catch (error) {
+      toast({
+        title: "업로드 실패",
+        description: error instanceof Error ? error.message : "인증 번호 업로드 중 오류가 발생했습니다.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsUploadingAuthCodes(false)
+      event.target.value = "" // 파일 입력 초기화
+    }
+  }
+
   const getVoteStatusBadge = (voter: Voter) => {
     if (voter.has_voted_idea && voter.has_voted_implementation) {
       return <Badge className="bg-green-500 text-white">완료</Badge>
@@ -450,6 +488,34 @@ export default function AdminPage() {
                     {isSaving ? "저장 중..." : "업데이트(저장)"}
                   </Button>
                 </div>
+          </CardContent>
+        </Card>
+
+        {/* Auth Codes Upload */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <UserCheck className="h-5 w-5" />
+              인증 번호 업로드
+            </CardTitle>
+            <CardDescription>
+              인증 번호 Excel 파일을 업로드하여 팀별 인증 번호를 관리하세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="auth-codes-upload">인증 번호 Excel 파일 선택</Label>
+              <Input
+                id="auth-codes-upload"
+                type="file"
+                accept=".xlsx,.xls"
+                onChange={handleAuthCodesUpload}
+                disabled={isUploadingAuthCodes}
+              />
+              <p className="text-xs text-muted-foreground">
+                지원 형식: .xlsx, .xls (팀 번호, 팀명, 그룹, 멤버 구분, LDAP 닉네임, 인증 번호 컬럼 포함)
+              </p>
+            </div>
           </CardContent>
         </Card>
 
