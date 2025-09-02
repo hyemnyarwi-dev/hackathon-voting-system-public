@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
 
     // Get existing teams
     const existingTeams = await query("SELECT * FROM teams")
+    console.log("[v0] Found", existingTeams.length, "existing teams")
     
     // Group auth codes by team
     const teamAuthCodes = new Map()
@@ -75,8 +76,12 @@ export async function POST(request: NextRequest) {
       }
     }
     
+    console.log("[v0] Grouped into", teamAuthCodes.size, "teams")
+    
     // Update teams with auth codes
     let updatedCount = 0
+    let notFoundCount = 0
+    
     for (const [teamKey, authCodeData] of teamAuthCodes) {
       const team = existingTeams.find(t => 
         t.team_number === authCodeData.team_number && 
@@ -103,13 +108,19 @@ export async function POST(request: NextRequest) {
           ]
         )
         updatedCount++
+      } else {
+        console.log("[v0] Team not found:", authCodeData.team_number, authCodeData.team_name)
+        notFoundCount++
       }
     }
+    
+    console.log("[v0] Updated:", updatedCount, "teams, Not found:", notFoundCount, "teams")
 
     return NextResponse.json({
       success: true,
-      message: `${updatedCount}개 팀의 인증 번호가 성공적으로 업데이트되었습니다.`,
+      message: `${updatedCount}개 팀의 인증 번호가 성공적으로 업데이트되었습니다.${notFoundCount > 0 ? ` (${notFoundCount}개 팀을 찾을 수 없음)` : ''}`,
       updatedCount: updatedCount,
+      notFoundCount: notFoundCount,
       totalAuthCodes: authCodes.length
     })
   } catch (error) {
