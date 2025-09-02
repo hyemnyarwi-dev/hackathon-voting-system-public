@@ -433,6 +433,19 @@ export default function AdminPage() {
     return team ? team.team_name : `팀 ${teamId}`
   }
 
+  const getGroupColor = (group: string) => {
+    switch (group) {
+      case "A":
+        return "bg-chart-1 text-white"
+      case "B":
+        return "bg-chart-2 text-white"
+      case "C":
+        return "bg-chart-3 text-white"
+      default:
+        return "bg-muted"
+    }
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -567,6 +580,7 @@ export default function AdminPage() {
                       <TableHead>팀장</TableHead>
                       <TableHead>팀원</TableHead>
                       <TableHead>그룹</TableHead>
+                      <TableHead>인증번호</TableHead>
                       <TableHead>작업</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -582,9 +596,25 @@ export default function AdminPage() {
                               .join(", ")}
                           </TableCell>
                           <TableCell>
-                            <Badge className="bg-primary text-primary-foreground">
+                            <Badge className={`text-white ${getGroupColor(team.team_group)}`}>
                               {team.team_group}
                             </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="text-xs space-y-1">
+                              {team.leader_name && (
+                                <div><strong>{team.leader_name}</strong> : {team.leader_auth_code || "미설정"}</div>
+                              )}
+                              {team.member2_name && (
+                                <div><strong>{team.member2_name}</strong> : {team.member2_auth_code || "미설정"}</div>
+                              )}
+                              {team.member3_name && (
+                                <div><strong>{team.member3_name}</strong> : {team.member3_auth_code || "미설정"}</div>
+                              )}
+                              {team.member4_name && (
+                                <div><strong>{team.member4_name}</strong> : {team.member4_auth_code || "미설정"}</div>
+                              )}
+                            </div>
                           </TableCell>
                           <TableCell>
                             <AlertDialog>
