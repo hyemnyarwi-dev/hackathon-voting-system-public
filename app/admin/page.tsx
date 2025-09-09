@@ -11,12 +11,16 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog"
-import { Upload, Trash2, Users, FileSpreadsheet, Home, RefreshCw, UserCheck, RotateCcw, Award } from "lucide-react"
+import { Upload, Trash2, Users, FileSpreadsheet, Home, RefreshCw, UserCheck, RotateCcw, Award, Lock } from "lucide-react"
 import type { Team, Voter, Judge } from "@/lib/database"
 import { useToast } from "@/hooks/use-toast"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState("")
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
+  const [authError, setAuthError] = useState("")
   const [teams, setTeams] = useState<Team[]>([])
   const [voters, setVoters] = useState<Voter[]>([])
   const [judges, setJudges] = useState<Judge[]>([])
@@ -36,8 +40,29 @@ export default function AdminPage() {
 
   // Load existing teams from database on page load
   useEffect(() => {
-    fetchExistingTeams()
-  }, [])
+    if (isAuthenticated) {
+      fetchExistingTeams()
+    }
+  }, [isAuthenticated])
+
+  const handleAuthentication = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsAuthenticating(true)
+    setAuthError("")
+
+    if (password === "hack2025") {
+      setIsAuthenticated(true)
+      setIsLoading(false)
+      toast({
+        title: "인증 성공",
+        description: "관리자 대시보드에 접근할 수 있습니다.",
+      })
+    } else {
+      setAuthError("비밀번호가 올바르지 않습니다.")
+    }
+
+    setIsAuthenticating(false)
+  }
 
   const fetchExistingTeams = async () => {
     try {
@@ -444,6 +469,49 @@ export default function AdminPage() {
       default:
         return "bg-muted"
     }
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Lock className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle>관리자 대시보드</CardTitle>
+            <CardDescription>
+              이 페이지에 접근하려면 비밀번호를 입력하세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleAuthentication} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="password">비밀번호</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isAuthenticating}
+                />
+                {authError && (
+                  <p className="text-sm text-red-500">{authError}</p>
+                )}
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isAuthenticating || !password.trim()}
+              >
+                {isAuthenticating ? "인증 중..." : "접근하기"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   if (isLoading) {
