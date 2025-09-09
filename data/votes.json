@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "voter_id": 5,
-    "team_id": 27,
+    "voter_id": 10,
+    "team_id": 9,
     "vote_type": "idea",
-    "voter_ldap": 5,
-    "created_at": "2025-09-02T02:11:46.012Z"
+    "voter_ldap": "gide.yso",
+    "created_at": "2025-09-02T10:14:19.980Z"
   },
   {
     "id": 2,
-    "voter_id": 5,
-    "team_id": 26,
+    "voter_id": 10,
+    "team_id": 2,
     "vote_type": "implementation",
-    "voter_ldap": 5,
-    "created_at": "2025-09-02T02:11:48.279Z"
+    "voter_ldap": "gide.yso",
+    "created_at": "2025-09-02T10:14:22.230Z"
   }
 ]

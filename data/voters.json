@@ -40,8 +40,53 @@
     "ldap_nickname": "kay.one",
     "team_id": 25,
     "voter_group": "C",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T02:11:41.866Z"
+  },
+  {
+    "id": 6,
+    "ldap_nickname": "bella.nam",
+    "team_id": 13,
+    "voter_group": "B",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T06:15:35.599Z"
+  },
+  {
+    "id": 7,
+    "ldap_nickname": "alicia.a",
+    "team_id": 1,
+    "voter_group": "A",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T06:22:20.752Z"
+  },
+  {
+    "id": 8,
+    "ldap_nickname": "logan.g",
+    "team_id": 1,
+    "voter_group": "A",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T06:50:22.471Z"
+  },
+  {
+    "id": 9,
+    "ldap_nickname": "james.yu",
+    "team_id": 3,
+    "voter_group": "A",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "created_at": "2025-09-02T06:59:38.619Z"
+  },
+  {
+    "id": 10,
+    "ldap_nickname": "gide.yso",
+    "team_id": 7,
+    "voter_group": "A",
     "has_voted_idea": true,
     "has_voted_implementation": true,
-    "created_at": "2025-09-02T02:11:41.866Z"
+    "created_at": "2025-09-02T10:13:57.357Z"
   }
 ]

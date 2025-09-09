@@ -204,11 +204,7 @@ export default function IdeaBallotPage() {
           </CardContent>
         </Card>
 
-        <div className="mt-6 text-center">
-          <Button variant="outline" onClick={() => router.push("/")} size="sm">
-            홈으로 돌아가기
-          </Button>
-        </div>
+
       </div>
     </div>
   )

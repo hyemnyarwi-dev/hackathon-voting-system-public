@@ -2,6 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const XLSX = require('xlsx');
 
+// Generate unique 6-digit authentication code
+function generateAuthCode() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
 // 팀 데이터 읽기
 const teamsData = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/teams.json'), 'utf8'));
 
@@ -15,7 +20,7 @@ teamsData.forEach(team => {
     '팀명': team.team_name,
     '멤버 구분': '팀장',
     'LDAP 닉네임': team.leader_name,
-    '인증 번호': team.leader_auth_code
+    '인증 번호': generateAuthCode()
   });
 
   // 팀원2 정보
@@ -25,7 +30,7 @@ teamsData.forEach(team => {
       '팀명': team.team_name,
       '멤버 구분': '팀원2',
       'LDAP 닉네임': team.member2_name,
-      '인증 번호': team.member2_auth_code
+      '인증 번호': generateAuthCode()
     });
   }
 
@@ -36,7 +41,7 @@ teamsData.forEach(team => {
       '팀명': team.team_name,
       '멤버 구분': '팀원3',
       'LDAP 닉네임': team.member3_name,
-      '인증 번호': team.member3_auth_code
+      '인증 번호': generateAuthCode()
     });
   }
 
@@ -47,7 +52,7 @@ teamsData.forEach(team => {
       '팀명': team.team_name,
       '멤버 구분': '팀원4',
       'LDAP 닉네임': team.member4_name,
-      '인증 번호': team.member4_auth_code
+      '인증 번호': generateAuthCode()
     });
   }
 });

@@ -4,8 +4,10 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Trophy, Medal, Award, Lightbulb, Code, Users, Download, RefreshCw, Home } from "lucide-react"
+import { Trophy, Medal, Award, Lightbulb, Code, Users, Download, RefreshCw, Home, Lock } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import { useToast } from "@/hooks/use-toast"
 import type { TeamWithVotes } from "@/lib/database"
@@ -16,6 +18,10 @@ interface GroupRanking {
 }
 
 export default function ResultsPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState("")
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
+  const [authError, setAuthError] = useState("")
   const [results, setResults] = useState<TeamWithVotes[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
@@ -23,11 +29,32 @@ export default function ResultsPage() {
   const { toast } = useToast()
 
   useEffect(() => {
-    fetchResults()
-    // Auto-refresh every 30 seconds
-    const interval = setInterval(fetchResults, 30000)
-    return () => clearInterval(interval)
-  }, [])
+    if (isAuthenticated) {
+      fetchResults()
+      // Auto-refresh every 30 seconds
+      const interval = setInterval(fetchResults, 30000)
+      return () => clearInterval(interval)
+    }
+  }, [isAuthenticated])
+
+  const handleAuthentication = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsAuthenticating(true)
+    setAuthError("")
+
+    if (password === "hack2025") {
+      setIsAuthenticated(true)
+      setIsLoading(false)
+      toast({
+        title: "인증 성공",
+        description: "결과 확인 페이지에 접근할 수 있습니다.",
+      })
+    } else {
+      setAuthError("비밀번호가 올바르지 않습니다.")
+    }
+
+    setIsAuthenticating(false)
+  }
 
   const fetchResults = async () => {
     try {
@@ -165,6 +192,49 @@ export default function ResultsPage() {
   }
 
   const COLORS = ["#15803d", "#4ade80", "#34d399"]
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Lock className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle>결과 확인 페이지</CardTitle>
+            <CardDescription>
+              이 페이지에 접근하려면 비밀번호를 입력하세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleAuthentication} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="password">비밀번호</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isAuthenticating}
+                />
+                {authError && (
+                  <p className="text-sm text-red-500">{authError}</p>
+                )}
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isAuthenticating || !password.trim()}
+              >
+                {isAuthenticating ? "인증 중..." : "접근하기"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   if (isLoading) {
     return (
