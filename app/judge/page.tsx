@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
-import { Award, Search } from "lucide-react"
+import { Award, Search, Lock } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import type { Judge } from "@/lib/database"
 
@@ -18,6 +18,10 @@ interface SearchResult {
 }
 
 export default function JudgeAuthPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [password, setPassword] = useState("")
+  const [isAuthenticating, setIsAuthenticating] = useState(false)
+  const [authError, setAuthError] = useState("")
   const [name, setName] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [judges, setJudges] = useState<Judge[]>([])
@@ -27,8 +31,28 @@ export default function JudgeAuthPage() {
   const { toast } = useToast()
 
   useEffect(() => {
-    fetchJudges()
-  }, [])
+    if (isAuthenticated) {
+      fetchJudges()
+    }
+  }, [isAuthenticated])
+
+  const handleAuthentication = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsAuthenticating(true)
+    setAuthError("")
+
+    if (password === "hack2025") {
+      setIsAuthenticated(true)
+      toast({
+        title: "인증 성공",
+        description: "심사위원 투표 페이지에 접근할 수 있습니다.",
+      })
+    } else {
+      setAuthError("비밀번호가 올바르지 않습니다.")
+    }
+
+    setIsAuthenticating(false)
+  }
 
   const fetchJudges = async () => {
     try {
@@ -146,6 +170,49 @@ export default function JudgeAuthPage() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Lock className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle>심사위원 투표 시스템</CardTitle>
+            <CardDescription>
+              이 페이지에 접근하려면 비밀번호를 입력하세요.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleAuthentication} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="password">비밀번호</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="비밀번호를 입력하세요"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isAuthenticating}
+                />
+                {authError && (
+                  <p className="text-sm text-red-500">{authError}</p>
+                )}
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isAuthenticating || !password.trim()}
+              >
+                {isAuthenticating ? "인증 중..." : "접근하기"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (

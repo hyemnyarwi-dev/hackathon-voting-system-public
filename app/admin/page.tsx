@@ -816,7 +816,7 @@ export default function AdminPage() {
                           <TableCell className="font-medium">{judge.id}</TableCell>
                           <TableCell>{judge.name}</TableCell>
                           <TableCell>
-                            <Badge className="bg-primary text-primary-foreground">
+                            <Badge className={`text-white ${getGroupColor(judge.judge_group)}`}>
                               {judge.judge_group}
                             </Badge>
                         </TableCell>
@@ -902,7 +902,7 @@ export default function AdminPage() {
                           <TableCell>{voter.ldap_nickname}</TableCell>
                           <TableCell>{getTeamNameById(voter.team_id)}</TableCell>
                           <TableCell>
-                            <Badge className="bg-primary text-primary-foreground">
+                            <Badge className={`text-white ${getGroupColor(voter.voter_group)}`}>
                               {voter.voter_group}
                             </Badge>
                           </TableCell>
@@ -976,7 +976,7 @@ export default function AdminPage() {
                           <TableCell className="font-medium">{judge.id}</TableCell>
                           <TableCell>{judge.name}</TableCell>
                           <TableCell>
-                            <Badge className="bg-primary text-primary-foreground">
+                            <Badge className={`text-white ${getGroupColor(judge.judge_group)}`}>
                               {judge.judge_group}
                             </Badge>
                           </TableCell>
