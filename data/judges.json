@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "billy.beane",
+    "judge_group": "A",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T01:57:21.532Z"
+  },
+  {
+    "id": 4,
+    "name": "derrick.p",
+    "judge_group": "A",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T01:58:29.671Z"
+  },
+  {
+    "id": 5,
+    "name": "biltz.w",
+    "judge_group": "B",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T01:59:36.919Z"
+  },
+  {
+    "id": 6,
+    "name": "jin.beam",
+    "judge_group": "B",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T01:59:46.274Z"
+  },
+  {
+    "id": 7,
+    "name": "brayden.2025",
+    "judge_group": "C",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T02:00:03.989Z"
+  },
+  {
+    "id": 8,
+    "name": "ted.rock",
+    "judge_group": "C",
+    "has_voted_idea": false,
+    "has_voted_implementation": false,
+    "idea_votes_used": 0,
+    "implementation_votes_used": 0,
+    "created_at": "2025-09-10T02:00:09.556Z"
+  }
+]

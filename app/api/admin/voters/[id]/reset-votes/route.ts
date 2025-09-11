@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { readData, writeData } from "@/lib/database"
 import type { Voter, Vote } from "@/lib/database"
 
@@ -24,22 +24,13 @@ export async function POST(request: NextRequest) {
     const updatedVotes = votes.filter(vote => vote.voter_id !== voterId)
     writeData("data/votes.json", updatedVotes)
 
-    // Reset voter's voting status
-    const updatedVoters = voters.map(v => {
-      if (v.id === voterId) {
-        return {
-          ...v,
-          has_voted_idea: false,
-          has_voted_implementation: false
-        }
-      }
-      return v
-    })
+    // Remove the voter completely from voters list
+    const updatedVoters = voters.filter(v => v.id !== voterId)
     writeData("data/voters.json", updatedVoters)
 
     return NextResponse.json({
       success: true,
-      message: `${voter.ldap_nickname}의 투표가 성공적으로 초기화되었습니다.`,
+      message: `${voter.ldap_nickname}의 투표가 초기화되고 투표자 목록에서 삭제되었습니다.`,
       removedVotes: votes.length - updatedVotes.length
     })
   } catch (error) {

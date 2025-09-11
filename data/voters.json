@@ -2,91 +2,10 @@
   {
     "id": 1,
     "ldap_nickname": "kaia.toast",
-    "team_id": 30,
-    "voter_group": "C",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-08-31T15:42:06.622Z"
-  },
-  {
-    "id": 2,
-    "ldap_nickname": "kai.09",
-    "team_id": 30,
-    "voter_group": "C",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-08-31T15:56:14.146Z"
-  },
-  {
-    "id": 3,
-    "ldap_nickname": "juno.choi",
-    "team_id": 30,
-    "voter_group": "C",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-01T13:06:11.244Z"
-  },
-  {
-    "id": 4,
-    "ldap_nickname": "aaron.bless",
-    "team_id": 12,
+    "team_id": 29,
     "voter_group": "B",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T01:59:22.494Z"
-  },
-  {
-    "id": 5,
-    "ldap_nickname": "kay.one",
-    "team_id": 25,
-    "voter_group": "C",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T02:11:41.866Z"
-  },
-  {
-    "id": 6,
-    "ldap_nickname": "bella.nam",
-    "team_id": 13,
-    "voter_group": "B",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T06:15:35.599Z"
-  },
-  {
-    "id": 7,
-    "ldap_nickname": "alicia.a",
-    "team_id": 1,
-    "voter_group": "A",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T06:22:20.752Z"
-  },
-  {
-    "id": 8,
-    "ldap_nickname": "logan.g",
-    "team_id": 1,
-    "voter_group": "A",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T06:50:22.471Z"
-  },
-  {
-    "id": 9,
-    "ldap_nickname": "james.yu",
-    "team_id": 3,
-    "voter_group": "A",
-    "has_voted_idea": false,
-    "has_voted_implementation": false,
-    "created_at": "2025-09-02T06:59:38.619Z"
-  },
-  {
-    "id": 10,
-    "ldap_nickname": "gide.yso",
-    "team_id": 7,
-    "voter_group": "A",
     "has_voted_idea": true,
     "has_voted_implementation": true,
-    "created_at": "2025-09-02T10:13:57.357Z"
+    "created_at": "2025-09-09T09:52:14.590Z"
   }
 ]

@@ -39,7 +39,11 @@ export async function POST(request: NextRequest) {
       })
       .filter((team) => team.leader_name) // Filter out empty rows
 
+    // Clear all existing data before uploading new teams
     await query("DELETE FROM teams")
+    await query("DELETE FROM voters")
+    await query("DELETE FROM judges")
+    await query("DELETE FROM votes")
 
     for (const team of teams) {
       await query(
@@ -61,7 +65,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       teams,
-      message: `${teams.length}개 팀이 성공적으로 저장되었습니다.`,
+      message: `${teams.length}개 팀이 성공적으로 저장되었습니다. 이전 투표 이력이 모두 삭제되었습니다.`,
     })
   } catch (error) {
     console.error("Excel upload error:", error)
